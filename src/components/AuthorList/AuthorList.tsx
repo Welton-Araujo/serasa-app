@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
-import { FiChevronDown } from 'react-icons/fi'; // import do ícone
-import Author from './Author';
+import { FiChevronDown } from 'react-icons/fi';
+import Author from './Author/Author';
+
+import {
+  FilterContainer,
+  SelectWrapper,
+  StyledSelect,
+  DropdownArrow,
+} from './AuthorList.styles';
 
 interface Post {
   id: number;
@@ -19,40 +25,6 @@ interface AuthorData {
   bio: string | null;
   posts: Post[];
 }
-
-const FilterContainer = styled.div`
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-`;
-
-const SelectWrapper = styled.div`
-  position: relative;
-  display: inline-block;
-`;
-
-const StyledSelect = styled.select`
-  background-color: #d1fae5; /* verde claro */
-  color: #07A46C; /* verde */
-  font-weight: 600;
-  padding: 0.5rem 2rem 0.5rem 1rem;
-  border: none;
-  border-radius: 0.375rem;
-  appearance: none;
-  cursor: pointer;
-`;
-
-const DropdownArrow = styled.span`
-  position: absolute;
-  right: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #059669;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  font-size: 1.2rem;
-`;
 
 const AuthorList: React.FC = () => {
   const [authors, setAuthors] = useState<AuthorData[]>([]);
@@ -98,7 +70,6 @@ const AuthorList: React.FC = () => {
   return (
     <div>
       <FilterContainer>
-        {/* Filtro por autor */}
         <SelectWrapper>
           <StyledSelect
             value={selectedAuthorId}
@@ -119,7 +90,6 @@ const AuthorList: React.FC = () => {
           </DropdownArrow>
         </SelectWrapper>
 
-        {/* Ordenar por */}
         <SelectWrapper>
           <StyledSelect
             value={sortOrder}

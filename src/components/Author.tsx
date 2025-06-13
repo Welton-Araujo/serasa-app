@@ -55,6 +55,7 @@ const Author: React.FC<AuthorProps> = ({ author }) => {
           ))}
         </div>
       )}
+      
     </Container>
   );
 };

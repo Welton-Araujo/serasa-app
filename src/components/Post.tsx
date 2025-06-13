@@ -40,7 +40,10 @@ const Title = styled.h2`
 const Content = styled.p`
   line-height: 1.6;
   color: #444;
+  word-break: break-word;
+  white-space: pre-wrap; /* se quiser preservar quebras de linha e espaços */
 `;
+
 
 const Icons = styled.div`
   position: absolute;
@@ -58,16 +61,39 @@ const Icons = styled.div`
       color: #000;
     }
   }
+
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
 `;
 
 const PostCard: React.FC<PostCardProps> = ({ title, content, date, author }) => {
-    
+  const currentUrl = window.location.href;
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(currentUrl).then(() => {
+      alert('Link copiado para a área de transferência!');
+    });
+  };
+
+  const twitterShare = `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(title)}`;
+  const linkedinShare = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`;
+
+  console.log("content: ", content)
   return (
     <Card>
       <Icons>
-        <FiTwitter />
-        <FiLinkedin />
-        <FiLink />
+        <a href={twitterShare} target="_blank" rel="noopener noreferrer" title="Compartilhar no Twitter">
+          <FiTwitter />
+        </a>
+        <a href={linkedinShare} target="_blank" rel="noopener noreferrer" title="Compartilhar no LinkedIn">
+          <FiLinkedin />
+        </a>
+        <span onClick={handleCopyLink} title="Copiar link">
+          <FiLink />
+        </span>
       </Icons>
       <AuthorName>{author.name}</AuthorName>
       <DateText>{new Date(date).toLocaleDateString('pt-BR')}</DateText>

@@ -49,7 +49,7 @@ const Author: React.FC<AuthorProps> = ({ author }) => {
           {author.posts.map(post => (
             <Post key={post.id}
                  title={post.title}
-                    content={post.content.slice(0, 300) + '...'}
+                    content={post.content}
                     date={ post.createdAt } 
                     author={{ name: author.name }} />
           ))}

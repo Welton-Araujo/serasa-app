@@ -5,7 +5,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 2rem;
-    background-color: #eaeaea;
+    background-color: #fff;
   }
 
   h1 {

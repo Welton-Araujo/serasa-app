@@ -2,37 +2,91 @@ import React from 'react';
 import AuthorList from './components/AuthorList';
 import styled from 'styled-components';
 import RecentePosts from './components/RecentePosts';
+import headerLogo from './assets/logo.png'; // imagem do header
+import footerLogo from './assets/logoFooter.png'; // imagem do footer
+
+const PageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+   background-color: #fff;
+`;
+
+const Header = styled.header`
+  background-color: #fff;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+`;
+
+const Logo = styled.img`
+  height: 40px;
+  margin-right: 10px;
+`;
+
+const HeaderTitle = styled.h1`
+  font-size: 1.8rem;
+  color: #333;
+  margin: 0;
+`;
 
 const Container = styled.div`
   display: flex;
+  align-items: flex-start;
   width: 100%;
 `;
 
 const ComponentePrincipal = styled.div`
   width: 75%;
-  background-color: #f0f0f0; // apenas para visualização
   padding: 20px;
   box-sizing: border-box;
 `;
 
 const ComponenteSecundario = styled.div`
   width: 25%;
-  background-color: #e0e0e0; // apenas para visualização
-  padding: 20px;
+  background-color: #F4F4FA;
+  padding: 24px;
   box-sizing: border-box;
+  border-radius: 8px;
+  align-self: flex-start;
+`;
+
+const Footer = styled.footer`
+  background-color: #fff;
+  color: #333;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const FooterLogo = styled.img`
+  height: 30px;
+`;
+
+const FooterText = styled.span`
+  font-size: 0.9rem;
 `;
 
 const App: React.FC = () => {
   return (
-    <Container>
-      <ComponentePrincipal>
-        <AuthorList />
-      </ComponentePrincipal>
-      <ComponenteSecundario>
-         <RecentePosts />
-      </ComponenteSecundario>
-    </Container>
-   
+    <PageWrapper>
+      <Header>
+        <Logo src={headerLogo} alt="Allow Me News Logo" />
+      </Header>
+      <Container>
+        <ComponentePrincipal>
+          <AuthorList />
+        </ComponentePrincipal>
+        <ComponenteSecundario>
+          <RecentePosts />
+        </ComponenteSecundario>
+      </Container>
+      <Footer>
+        <FooterLogo src={footerLogo} alt="Allow Me Footer Logo" />
+        <FooterText>Copyright © 2023 AllowMe News. Todos os direitos reservados.</FooterText>
+      </Footer>
+    </PageWrapper>
   );
 };
 

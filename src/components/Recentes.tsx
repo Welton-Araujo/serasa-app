@@ -21,9 +21,11 @@ interface AuthorProps {
 }
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   margin: 1rem 0;
-  padding: 1rem;
   border-radius: 8px;
+  gap: 4px;
 `;
 
 const Name = styled.h2`
@@ -40,11 +42,17 @@ const Bio = styled.p`
   color: #666;
 `;
 
+const NewsList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px; 
+`;
+
 const Author: React.FC<AuthorProps> = ({ author }) => {
   return (
     <Container>
       {author.posts.length > 0 && (
-        <div>
+        <NewsList>
           {author.posts.map(post => (
             <News key={post.id}
                  title={post.title}
@@ -52,7 +60,7 @@ const Author: React.FC<AuthorProps> = ({ author }) => {
                     date={ post.createdAt } 
                     author={{ name: author.name }} />
           ))}
-        </div>
+        </NewsList>
       )}
       
     </Container>

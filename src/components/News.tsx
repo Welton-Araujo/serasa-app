@@ -11,22 +11,33 @@ interface PostCardProps {
 }
 
 const Card = styled.div`
-  border: 1px solid #a0a0b0;  /* borda leve cinza */
+  border: 1px solid #CDCDDF;  
   border-radius: 4px;
-  padding: 1rem;
+  padding: 16px;
   position: relative;
-  background: transparent;     /* sem fundo */
+  background: transparent;    
 `;
 
 const Title = styled.h2`
-  margin: 0 0 0.5rem;            // menos espaço abaixo do título
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0;
+  margin: 0 0 0.5rem;
 `;
 
+
 const DateText = styled.p`
-  font-size: 0.85rem;
-   color: #e91e63;
-  margin: 0;                     // remove margens extras
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: #E04C85;
+  margin: 0;
 `;
+
 
 
 const PostCard: React.FC<PostCardProps> = ({ title, date }) => {

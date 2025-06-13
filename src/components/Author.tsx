@@ -20,7 +20,6 @@ interface AuthorProps {
 }
 
 const Container = styled.div`
-  background: #fff;
   margin: 1rem 0;
   padding: 1rem;
   border-radius: 8px;

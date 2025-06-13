@@ -51,6 +51,15 @@ const DropdownArrow = styled.span`
   pointer-events: none;
 `;
 
+const Heading = styled.h2`
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0;
+  margin-bottom: 1rem;
+`;
+
 const AuthorList: React.FC = () => {
   const [authors, setAuthors] = useState<AuthorData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -94,7 +103,7 @@ const AuthorList: React.FC = () => {
 
   return (
     <div>
-      <h2>Ultimas noticias</h2>
+      <Heading>Últimas notícias</Heading>
       {filteredAuthors.length > 0 ? (
         filteredAuthors.map((author) => (
           <Recentes key={author.id} author={author} />

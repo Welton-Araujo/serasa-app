@@ -7,6 +7,7 @@ interface PostType {
   title: string;
   content: string;
   published: boolean;
+  createdAt: string;
 }
 
 interface AuthorProps {
@@ -43,13 +44,14 @@ const Bio = styled.p`
 const Author: React.FC<AuthorProps> = ({ author }) => {
   return (
     <Container>
-      <Name>{author.name}</Name>
-      {author.bio && <Bio>{author.bio}</Bio>}
       {author.posts.length > 0 && (
         <div>
-          <h4>Posts:</h4>
           {author.posts.map(post => (
-            <Post key={post.id} post={post} />
+            <Post key={post.id}
+                 title={post.title}
+                    content={post.content.slice(0, 300) + '...'}
+                    date={ post.createdAt } 
+                    author={{ name: author.name }} />
           ))}
         </div>
       )}

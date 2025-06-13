@@ -1,50 +1,80 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FiTwitter, FiLinkedin, FiLink } from 'react-icons/fi';
 
-interface PostProps {
-  post: {
-    title: string;
-    content: string;
-    published: boolean;
+interface PostCardProps {
+  title: string;
+  content: string;
+  date: string;
+  author: {
+    name: string;
   };
 }
 
-const PostContainer = styled.div`
-  background: #f1f1f1;
-  padding: 0.8rem;
-  border-radius: 6px;
-  margin: 0.5rem 0;
+const Card = styled.div`
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  position: relative;
 `;
 
-const Title = styled.h5`
+const AuthorName = styled.p`
+  color: #e91e63;
+  text-transform: uppercase;
+  font-weight: bold;
   margin: 0;
 `;
 
+const DateText = styled.p`
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0.2rem 0 1.2rem;
+`;
+
+const Title = styled.h2`
+  margin: 0 0 1rem;
+`;
+
 const Content = styled.p`
-  font-size: 0.9rem;
+  line-height: 1.6;
   color: #444;
 `;
 
-const Badge = styled.span<{ published: boolean }>`
-  display: inline-block;
-  background-color: ${({ published }) => (published ? '#4caf50' : '#f44336')};
-  color: white;
-  padding: 0.2rem 0.6rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  margin-bottom: 0.3rem;
+const Icons = styled.div`
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  gap: 0.8rem;
+
+  svg {
+    color: #777;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      color: #000;
+    }
+  }
 `;
 
-const Post: React.FC<PostProps> = ({ post }) => {
+const PostCard: React.FC<PostCardProps> = ({ title, content, date, author }) => {
+    
   return (
-    <PostContainer>
-      <Badge published={post.published}>
-        {post.published ? 'Publicado' : 'Rascunho'}
-      </Badge>
-      <Title>{post.title}</Title>
-      <Content>{post.content.slice(0, 150)}...</Content>
-    </PostContainer>
+    <Card>
+      <Icons>
+        <FiTwitter />
+        <FiLinkedin />
+        <FiLink />
+      </Icons>
+      <AuthorName>{author.name}</AuthorName>
+      <DateText>{new Date(date).toLocaleDateString('pt-BR')}</DateText>
+      <Title>{title}</Title>
+      <Content>{content}</Content>
+    </Card>
   );
 };
 
-export default Post;
+export default PostCard;

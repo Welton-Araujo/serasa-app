@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'; 
 import styled from 'styled-components';
-import { FiTwitter, FiLinkedin, FiLink } from 'react-icons/fi';
+import { FaTwitterSquare, FaLinkedin, FaLink } from 'react-icons/fa';
 
 interface PostCardProps {
   title: string;
@@ -21,29 +21,48 @@ const Card = styled.div`
 `;
 
 const AuthorName = styled.p`
-  color: #e91e63;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0;
   text-transform: uppercase;
-  font-weight: bold;
+  color: #E04C85;
   margin: 0;
 `;
 
 const DateText = styled.p`
-  font-size: 0.85rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0;
   color: #666;
   margin: 0.2rem 0 1.2rem;
 `;
 
+
 const Title = styled.h2`
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0;
+  color: #18191E;
   margin: 0 0 1rem;
 `;
 
-const Content = styled.p`
-  line-height: 1.6;
-  color: #444;
-  word-break: break-word;
-  white-space: pre-wrap; /* se quiser preservar quebras de linha e espaços */
-`;
 
+const Content = styled.p`
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  letter-spacing: 0;
+  color: #58595D;
+  word-break: break-word;
+  white-space: pre-wrap;
+`;
 
 const Icons = styled.div`
   position: absolute;
@@ -81,18 +100,17 @@ const PostCard: React.FC<PostCardProps> = ({ title, content, date, author }) => 
   const twitterShare = `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(title)}`;
   const linkedinShare = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`;
 
-  console.log("content: ", content)
   return (
     <Card>
       <Icons>
         <a href={twitterShare} target="_blank" rel="noopener noreferrer" title="Compartilhar no Twitter">
-          <FiTwitter />
+          <FaTwitterSquare />
         </a>
         <a href={linkedinShare} target="_blank" rel="noopener noreferrer" title="Compartilhar no LinkedIn">
-          <FiLinkedin />
+          <FaLinkedin />
         </a>
         <span onClick={handleCopyLink} title="Copiar link">
-          <FiLink />
+          <FaLink />
         </span>
       </Icons>
       <AuthorName>{author.name}</AuthorName>

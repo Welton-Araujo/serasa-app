@@ -5,9 +5,6 @@ interface PostCardProps {
   title: string;
   content: string;
   date: string;
-  author: {
-    name: string;
-  };
 }
 
 const Card = styled.div`

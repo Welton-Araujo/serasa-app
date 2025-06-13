@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import Author from './Author';
 import Recentes from './Recentes';
 
 interface Post {
@@ -10,14 +9,20 @@ interface Post {
   content: string;
   published: boolean;
   createdAt: string;
+  author: {
+    id: number;
+    name: string;
+    email: string;
+    bio: string | null;
+  };
 }
 
-interface AuthorData {
-  id: number;
-  name: string;
-  email: string;
-  bio: string | null;
-  posts: Post[];
+interface PostsResponse {
+  data: Post[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
 }
 
 const FilterContainer = styled.div`
@@ -60,59 +65,36 @@ const Heading = styled.h2`
   margin-bottom: 1rem;
 `;
 
-const AuthorList: React.FC = () => {
-  const [authors, setAuthors] = useState<AuthorData[]>([]);
+const PostsList: React.FC = () => {
+  const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedAuthorId, setSelectedAuthorId] = useState<number | 'all'>('all');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/authors?page=1&limit=5')
+    axios.get<PostsResponse>('http://localhost:3000/api/posts?page=1&limit=5')
       .then(res => {
-        setAuthors(res.data.data);
+        setPosts(res.data.data);
         setLoading(false);
       });
   }, []);
 
-  if (loading) return <p>Carregando autores...</p>;
-
-  let filteredAuthors =
-    selectedAuthorId === 'all'
-      ? authors
-      : authors.filter(author => author.id === selectedAuthorId);
-
-  filteredAuthors = [...filteredAuthors].sort((a, b) => {
-    const getLatestDate = (posts: Post[]) => {
-      if (posts.length === 0) return '';
-      return posts
-        .map(post => post.createdAt)
-        .sort((a, b) =>
-          sortOrder === 'asc'
-            ? Date.parse(a) - Date.parse(b)
-            : Date.parse(b) - Date.parse(a)
-        )[0];
-    };
-
-    const dateA = getLatestDate(a.posts);
-    const dateB = getLatestDate(b.posts);
-
-    return sortOrder === 'asc'
-      ? Date.parse(dateA) - Date.parse(dateB)
-      : Date.parse(dateB) - Date.parse(dateA);
-  });
+  if (loading) return <p>Carregando posts...</p>;
 
   return (
     <div>
       <Heading>Últimas notícias</Heading>
-      {filteredAuthors.length > 0 ? (
-        filteredAuthors.map((author) => (
-          <Recentes key={author.id} author={author} />
+      {posts.length > 0 ? (
+        posts.map((post) => (
+          <Recentes 
+            key={post.id} 
+            post={post}
+            author={post.author}
+          />
         ))
       ) : (
-        <p>Nenhum autor encontrado.</p>
+        <p>Nenhum post encontrado.</p>
       )}
     </div>
   );
 };
 
-export default AuthorList;
+export default PostsList;

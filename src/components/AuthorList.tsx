@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { FiChevronDown } from 'react-icons/fi'; // import do ícone
 import Author from './Author';
 
 interface Post {
@@ -32,7 +33,7 @@ const SelectWrapper = styled.div`
 
 const StyledSelect = styled.select`
   background-color: #d1fae5; /* verde claro */
-  color: #059669; /* verde */
+  color: #07A46C; /* verde */
   font-weight: 600;
   padding: 0.5rem 2rem 0.5rem 1rem;
   border: none;
@@ -48,6 +49,9 @@ const DropdownArrow = styled.span`
   transform: translateY(-50%);
   color: #059669;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
 `;
 
 const AuthorList: React.FC = () => {
@@ -110,7 +114,9 @@ const AuthorList: React.FC = () => {
               </option>
             ))}
           </StyledSelect>
-          <DropdownArrow>▼</DropdownArrow>
+          <DropdownArrow>
+            <FiChevronDown />
+          </DropdownArrow>
         </SelectWrapper>
 
         {/* Ordenar por */}
@@ -123,7 +129,9 @@ const AuthorList: React.FC = () => {
             <option value="asc">Mais antigos primeiro</option>
             <option value="desc">Mais recentes primeiro</option>
           </StyledSelect>
-          <DropdownArrow>▼</DropdownArrow>
+          <DropdownArrow>
+            <FiChevronDown />
+          </DropdownArrow>
         </SelectWrapper>
       </FilterContainer>
 

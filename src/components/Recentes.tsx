@@ -11,13 +11,16 @@ interface PostType {
   createdAt: string;
 }
 
-interface AuthorProps {
-  author: {
-    name: string;
-    email: string;
-    bio: string | null;
-    posts: PostType[];
-  };
+interface AuthorType {
+  id: number;
+  name: string;
+  email: string;
+  bio: string | null;
+}
+
+interface RecentesProps {
+  post: PostType;
+  author: AuthorType;
 }
 
 const Container = styled.div`
@@ -48,23 +51,17 @@ const NewsList = styled.div`
   gap: 4px; 
 `;
 
-const Author: React.FC<AuthorProps> = ({ author }) => {
+const Recentes: React.FC<RecentesProps> = ({ post, author }) => {
   return (
     <Container>
-      {author.posts.length > 0 && (
-        <NewsList>
-          {author.posts.map(post => (
-            <News key={post.id}
-                 title={post.title}
-                    content={post.content}
-                    date={ post.createdAt } 
-                    author={{ name: author.name }} />
-          ))}
-        </NewsList>
-      )}
-      
+      <News
+        key={post.id}
+        title={post.title}
+        content={post.content}
+        date={post.createdAt}
+      />
     </Container>
   );
 };
 
-export default Author;
+export default Recentes;

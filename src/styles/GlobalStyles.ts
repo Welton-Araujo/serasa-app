@@ -2,9 +2,8 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: Inter, sans-serif;
     margin: 0;
-    padding: 2rem;
     background-color: #fff;
   }
 

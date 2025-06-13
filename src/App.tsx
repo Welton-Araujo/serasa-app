@@ -1,6 +1,7 @@
 import React from 'react';
 import AuthorList from './components/AuthorList';
 import styled from 'styled-components';
+import RecentePosts from './components/RecentePosts';
 
 const Container = styled.div`
   display: flex;
@@ -28,7 +29,7 @@ const App: React.FC = () => {
         <AuthorList />
       </ComponentePrincipal>
       <ComponenteSecundario>
-         <AuthorList />
+         <RecentePosts />
       </ComponenteSecundario>
     </Container>
    
